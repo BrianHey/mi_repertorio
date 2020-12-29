@@ -24,7 +24,7 @@ module.exports = {
     consultar
 }
 
-if (req.url == "/canciones" && req.method == "GET") {
-    const registros = await consultar()
-    res.end(JSON.stringify(registros))
-}
+// if (req.url == "/canciones" && req.method == "GET") {
+//     const registros = await consultar()
+//     res.end(JSON.stringify(registros))
+// }
