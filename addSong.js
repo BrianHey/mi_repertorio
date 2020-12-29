@@ -1,7 +1,7 @@
 const addSong = async (datos) => {
   const query = {
     text: "INSERT INTO repertorio VALUES ($1, $2, $3)",
-    values: datos,
+    values: [datos],
   };
   try {
     const result = await pool.query(query);
