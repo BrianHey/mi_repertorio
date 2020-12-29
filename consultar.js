@@ -24,6 +24,14 @@ module.exports = {
     consultar
 }
 
+// ruta html
+// if (req.url == "/" && req.method == "GET") {
+//     res.setHeader("content-type", "text/html")
+//     const html = fs.readFileSync("index.html", "utf8")
+//     res.end(html)
+// }
+
+// ruta get canciones
 // if (req.url == "/canciones" && req.method == "GET") {
 //     const registros = await consultar()
 //     res.end(JSON.stringify(registros))
