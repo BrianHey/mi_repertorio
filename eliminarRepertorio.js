@@ -1,7 +1,7 @@
-const eliminarRepertorio = async (dato) => {
+const eliminarRepertorio = async (dato, pool) => {
     const consulta = {
         text: 'DELETE from repertorio where id=$1',
-        values: dato,
+        values: [dato],
         name:'eliminar-repertorio'
     }
     console.log(consulta)
@@ -16,9 +16,3 @@ const eliminarRepertorio = async (dato) => {
 
 module.exports = eliminarRepertorio
 
-/*
-if(req.url.startsWith('/cancion') && req.method == 'DELETE'){
-    const { id } = url.parse(req.url, true).query;
-    const registros = await eliminarRepertorio(id)
-    res.end(JSON.stringify(registros))
-}*/
