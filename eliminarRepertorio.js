@@ -4,7 +4,6 @@ const eliminarRepertorio = async (dato, pool) => {
         values: [dato],
         name:'eliminar-repertorio'
     }
-    console.log(consulta)
     try {
         const result = await pool.query(consulta)
         return result
