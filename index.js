@@ -1,7 +1,6 @@
 const url = require("url");
 const http = require("http");
 const fs = require("fs");
-const { consultar } = require("./consultar");
 
 const { Pool } = require("pg");
 
@@ -13,7 +12,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-const { eliminarRepertorio } = require("./consultas");
+const { eliminarRepertorio, consultar, addSong } = require("./consultas");
 
 http
   .createServer(async (req, res) => {
@@ -31,6 +30,17 @@ http
     if (req.url.startsWith("/cancion") && req.method == "DELETE") {
       const registros = await eliminarRepertorio(id, pool);
       res.end(JSON.stringify(registros));
+    }
+    if (req.url == "/cancion" && req.method == "POST") {
+      let body = "";
+      req.on("data", (datos) => {
+        body += datos;
+      });
+      req.on("end", async () => {
+        const datos = Object.values(JSON.parse(body));
+        const result = await addSong(datos, pool);
+        res.end(JSON.stringify(result));
+      });
     }
   })
   .listen(3000);

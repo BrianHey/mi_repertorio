@@ -1,6 +1,6 @@
-const addSong = async (datos) => {
+const addSong = async (datos, pool) => {
   const query = {
-    text: "INSERT INTO repertorio VALUES ($1, $2, $3)",
+    text: "INSERT INTO repertorio (cancion, artista, tono) VALUES ($1, $2, $3)",
     values: datos,
   };
   try {
@@ -11,17 +11,5 @@ const addSong = async (datos) => {
     return e;
   }
 };
-
-if (req.url == "/cancion" && req.method == "POST") {
-  let body = "";
-  req.on("data", (datos) => {
-    body += datos;
-  });
-  req.on("end", async () => {
-    const datos = Object.values(JSON.parse(body));
-    const res = await addSong(datos);
-    res.end(JSON.stringify(res));
-  });
-}
 
 module.exports = addSong;
