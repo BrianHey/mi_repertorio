@@ -13,15 +13,3 @@ const editar = async (datos, pool) => {
 };
 
 module.exports = { editar };
-
-if (req.url == "/cancion" && req.method == "PUT") {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk;
-  });
-  req.on("end", async () => {
-    const datos = Object.values(JSON.parse(body));
-    const respuesta = await editar(datos, pool);
-    res.end(JSON.stringify(respuesta));
-  });
-}

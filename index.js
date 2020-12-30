@@ -12,7 +12,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-const { eliminarRepertorio, consultar, addSong } = require("./consultas");
+const { eliminarRepertorio, consultar, addSong, editar } = require("./consultas");
 
 http
   .createServer(async (req, res) => {
@@ -40,6 +40,18 @@ http
         const datos = Object.values(JSON.parse(body));
         const result = await addSong(datos, pool);
         res.end(JSON.stringify(result));
+      });
+    }
+
+    if (req.url == "/cancion" && req.method == "PUT") {
+      let body = "";
+      req.on("data", (chunk) => {
+        body += chunk;
+      });
+      req.on("end", async () => {
+        const datos = Object.values(JSON.parse(body));
+        const respuesta = await editar(datos, pool);
+        res.end(JSON.stringify(respuesta));
       });
     }
   })
